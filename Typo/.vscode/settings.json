@@ -67,7 +67,7 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "BrainlessGameJam.slnx",
+    "dotnet.defaultSolution": "Typo.slnx",
     "editor.formatOnPaste": false,
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file",
