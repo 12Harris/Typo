@@ -1,0 +1,546 @@
+fileFormatVersion: 2
+guid: dffac65b8a3e58148a69fd5f16a2bb5f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7359938066054819021
+    second: Stopper2_0
+  - first:
+      213: -6268624988924231120
+    second: Stopper2_1
+  - first:
+      213: 867198998543745672
+    second: Stopper2_2
+  - first:
+      213: 2967362151468527601
+    second: Stopper2_3
+  - first:
+      213: -5627975227265958638
+    second: Stopper2_4
+  - first:
+      213: 2780729055333759440
+    second: Stopper2_5
+  - first:
+      213: 4737178771436341694
+    second: Stopper2_6
+  - first:
+      213: -7809717647582672242
+    second: Stopper2_7
+  - first:
+      213: -806421211033565550
+    second: Stopper2_8
+  - first:
+      213: 9073859173729354979
+    second: Stopper2_9
+  - first:
+      213: 6500137969349391859
+    second: Stopper2_10
+  - first:
+      213: 427430874921946141
+    second: Stopper2_11
+  - first:
+      213: -3918662079241349006
+    second: Stopper2_12
+  - first:
+      213: 7994439114155382746
+    second: Stopper2_13
+  - first:
+      213: -2912505838929498360
+    second: Stopper2_14
+  - first:
+      213: -8543672191037975079
+    second: Stopper2_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Stopper2_0
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 15423
+        width: 642
+        height: 834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcca21c2da0c32660800000000000000
+      internalID: 7359938066054819021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_1
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 14399
+        width: 642
+        height: 834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 032c80109ce5109a0800000000000000
+      internalID: -6268624988924231120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_2
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 13375
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88246c105e8e80c00800000000000000
+      internalID: 867198998543745672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_3
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 12351
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ff683ea7203e2920800000000000000
+      internalID: 2967362151468527601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_4
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 11327
+        width: 642
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21d3d1e595a65e1b0800000000000000
+      internalID: -5627975227265958638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_5
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 10303
+        width: 642
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d9b6c7c752279620800000000000000
+      internalID: 2780729055333759440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_6
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 9279
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb90cf47ef6ddb140800000000000000
+      internalID: 4737178771436341694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_7
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 8255
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a4cbb5d2f4e9390800000000000000
+      internalID: -7809717647582672242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_8
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 7231
+        width: 642
+        height: 834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29601016e240fc4f0800000000000000
+      internalID: -806421211033565550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_9
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 6207
+        width: 642
+        height: 834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e4ce08d7d2dced70800000000000000
+      internalID: 9073859173729354979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_10
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 5183
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f5791e3b01253a50800000000000000
+      internalID: 6500137969349391859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_11
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 4159
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1cc1c9bd1a8ee500800000000000000
+      internalID: 427430874921946141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_12
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 3135
+        width: 642
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2789604d99d1e99c0800000000000000
+      internalID: -3918662079241349006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_13
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 2111
+        width: 642
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad758b99404f1fe60800000000000000
+      internalID: 7994439114155382746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_14
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1087
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80f2b50ee53b497d0800000000000000
+      internalID: -2912505838929498360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stopper2_15
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 63
+        width: 642
+        height: 866
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d55cc79867ce6980800000000000000
+      internalID: -8543672191037975079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Stopper2_0: 7359938066054819021
+      Stopper2_1: -6268624988924231120
+      Stopper2_10: 6500137969349391859
+      Stopper2_11: 427430874921946141
+      Stopper2_12: -3918662079241349006
+      Stopper2_13: 7994439114155382746
+      Stopper2_14: -2912505838929498360
+      Stopper2_15: -8543672191037975079
+      Stopper2_2: 867198998543745672
+      Stopper2_3: 2967362151468527601
+      Stopper2_4: -5627975227265958638
+      Stopper2_5: 2780729055333759440
+      Stopper2_6: 4737178771436341694
+      Stopper2_7: -7809717647582672242
+      Stopper2_8: -806421211033565550
+      Stopper2_9: 9073859173729354979
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
