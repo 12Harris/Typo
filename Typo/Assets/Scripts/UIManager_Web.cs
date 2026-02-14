@@ -12,6 +12,8 @@ public static class UIManager_Web
     public static string AnimatedWordsText => _animatedWordsText.text;
     private static GameObject _animatedWordsTemplate;
     private static Vector3 _animatedWordsTemplateContainerStartPos = Vector3.zero;
+    private static Vector3 _animatedWordsTemplateContainerEndPos = Vector3.zero;
+    private static float _animTextWidth = 0f;
 
     private static string _oldWordTemplate = "";
     private static string _currentWordTemplate = "";
@@ -39,6 +41,7 @@ public static class UIManager_Web
             Vector3[] corners = new Vector3[4];
             _animatedWordsTemplate.GetComponent<RectTransform>().GetWorldCorners(corners);
             _animatedWordsTemplateContainerStartPos = (corners[0] + corners[1]) / 2f;
+            _animatedWordsTemplateContainerEndPos = (corners[2] + corners[3]) / 2f;
         }
 
         _isInitialized = true;
@@ -90,8 +93,7 @@ public static class UIManager_Web
         string currentWord = GameManager_Web.Instance.CurrentWordTemplate;
         var pos = Utils.FindFirstMatchingSubstring2(_animatedWordsText.text, currentWord + "-", 0, out string matchingWord);
 
-        Debug.Log("match word: " + matchingWord);
-        if (pos < 0)
+        if (pos < 0 || currentWord == "")
             LastWordTemplateOffset = 0;
         else
         {
@@ -101,12 +103,15 @@ public static class UIManager_Web
                 LastWordTemplateOffset += matchingWord.Length;
 
         }
+        //Debug.Log("match word: " + matchingWord + "Pos: " + pos + "lastword offset: " + LastWordTemplateOffset);
+        Debug.Log("match word: " + matchingWord + "current word: " + currentWord + "laswordoffset: " + LastWordTemplateOffset);
+
         //LastWordTemplateOffset = text.IndexOf(currentWord, StringComparison.Ordinal) + currentWord.Length;
-        Debug.Log("Lastword template offset: " + LastWordTemplateOffset + ", current word: " + currentWord);
+        //Debug.Log("Lastword template offset: " + LastWordTemplateOffset + ", current word: " + currentWord);
 
     }
 
-    public static void UpdateWordsTemplate(string wordTemplate, bool disappearing = false)
+    public static void UpdateWordsTemplate(string wordTemplate)
     {
         EnsureInitialized();
 
@@ -120,24 +125,8 @@ public static class UIManager_Web
         //int startIndex = text.IndexOf(wordTemplate, LastWordTemplateOffset, StringComparison.Ordinal);
         int startIndex;
         string matchingWord = "";
-        /*string matchingWord2 = "";
-        var temp = "";
 
-        if (_animatedWordsText.text.IndexOf('-') > -1)
-        {
-            temp = _animatedWordsText.text.Substring(0, _animatedWordsText.text.IndexOf('-'));
-
-            //do the first letters match the last letters of the current word template?
-            var i1 = Utils.FindFirstMatchingSubstring2(_animatedWordsText.text, temp, 0, out matchingWord);
-            var i2 = Utils.FindFirstMatchingSubstring2(wordTemplate, temp, 0, out matchingWord2);
-        }
-
-        if (matchingWord != "" && matchingWord == matchingWord2)
-            startIndex = 0;
-        else
-            startIndex = Utils.FindFirstMatchingSubstring2(_animatedWordsText.text, wordTemplate, LastWordTemplateOffset, out matchingWord);*/
-
-        startIndex = Utils.FindFirstMatchingSubstring2(_animatedWordsText.text, wordTemplate, LastWordTemplateOffset, out matchingWord);
+        startIndex = Utils.FindFirstMatchingSubstring2(_animatedWordsText.text, wordTemplate + "-", LastWordTemplateOffset, out matchingWord);
 
         if (startIndex == -1) return;
 
@@ -201,33 +190,22 @@ public static class UIManager_Web
     {
         Debug.Log("in animated text 2");
         EnsureInitialized();
-        Vector3 firstCharWorldPos = GetCharPosition(0);
-
-        List<Vector3> charPositions = new List<Vector3>();
-        for (int i = 1; i < _animatedWordsText.text.Length; i++)
-        {
-            charPositions.Add(GetCharPosition(i));
-        }
-
-        var xDif = charPositions[0] - firstCharWorldPos;
 
         _animatedWordsText.ForceMeshUpdate();
 
-        _animatedWordsText.text = WordDisappearing(_animatedWordsText.text);
+        var text = WordDisappearing(_animatedWordsText.text);
 
-
-        float preferredWidth = _animatedWordsText.preferredWidth;
+        _animTextWidth = _animatedWordsText.preferredWidth;
         _animatedWordsText.rectTransform.SetSizeWithCurrentAnchors(
             RectTransform.Axis.Horizontal,
-            preferredWidth
+            _animTextWidth
         );
 
         //shift the text container one letter to the left
-        Vector3[] corners = new Vector3[4];
-        _animatedWordsTemplate.GetComponent<RectTransform>().GetWorldCorners(corners);
-        var newPos = corners[0] + Vector3.right * preferredWidth / 2;
-        _animatedWordsText.transform.position = new Vector3(newPos.x, _animatedWordsText.transform.position.y, newPos.z) + Vector3.right * 50;
-        //var textStartPos = (textcorners[0] + textcorners[1]) / 2f;
+        var newPos = _animatedWordsTemplateContainerStartPos + Vector3.right * _animTextWidth / 2;
+        _animatedWordsText.transform.position = new Vector3(newPos.x, _animatedWordsText.transform.position.y, newPos.z);
+        UpdateWordsTemplate(GameManager_Web.Instance.CurrentWordTemplate);
+
     }
 
     public static void UpdateAnimatedText1(string word, int charIndex)
@@ -246,23 +224,34 @@ public static class UIManager_Web
 
         Debug.Log("first char world pos: " + firstCharWorldPos + ", startPosX: " + _animatedWordsTemplateContainerStartPos.x);
 
-
-        float preferredWidth = _animatedWordsText.preferredWidth;
-        _animatedWordsText.rectTransform.SetSizeWithCurrentAnchors(
-            RectTransform.Axis.Horizontal,
-            preferredWidth
-        );
-
-
-        if (firstCharWorldPos.x <= _animatedWordsTemplateContainerStartPos.x + 50.0f)
+        /*if (firstCharWorldPos.x <= _animatedWordsTemplateContainerStartPos.x + 50.0f)
         {
             Debug.Log("disappear!");
             text = WordDisappearing(text);
 
+        }*/
+
+        _animTextWidth = _animatedWordsText.preferredWidth;
+
+        if(_animTextWidth >= _animatedWordsTemplate.GetComponent<RectTransform>().rect.width)
+        {
+            _animTextWidth = _animatedWordsTemplate.GetComponent<RectTransform>().rect.width;
+            text = WordDisappearing(text);
+            Debug.Log("okay");
         }
 
         _animatedWordsText.text = text;
-        UpdateWordsTemplate(GameManager_Web.Instance.CurrentWordTemplate, disappearing);
+
+        _animatedWordsText.rectTransform.SetSizeWithCurrentAnchors(
+            RectTransform.Axis.Horizontal,
+            _animTextWidth
+        );
+
+         //shift the text container to the right
+        var newPos = _animatedWordsTemplateContainerEndPos - Vector3.right * _animTextWidth / 2;
+        _animatedWordsText.transform.position = new Vector3(newPos.x, _animatedWordsText.transform.position.y, newPos.z);
+
+        UpdateWordsTemplate(GameManager_Web.Instance.CurrentWordTemplate);
     }
 
 
@@ -273,10 +262,11 @@ public static class UIManager_Web
             GameManager_Web.Instance.CurrentWordTemplate.Length > 0)
             GameManager_Web.Instance.CurrentWordTemplate = GameManager_Web.Instance.CurrentWordTemplate.Substring(1);
 
+        var firstChar = text[0];
         text = text.Substring(1);
-        //_animatedWordsText.text = text;
+        _animatedWordsText.text = text;
 
-        if (text[0] == '-')
+        if (firstChar == '-')
         {
 
             _onWordDisappeared?.Invoke(GameManager_Web.Instance.CurrentWordTemplate == "");

@@ -71,6 +71,7 @@ public static class Utils
             if (index >= 0)
             {
                 matchingWord = word;
+                Debug.Log("Best Index(Whole word): " + index);
                 return index;
             }
             return -1;
@@ -85,13 +86,15 @@ public static class Utils
             {
                 bestIndex = index;
                 bestLength = wordSpan.Length - start;
-                Debug.Log("Best Index: " + bestIndex);
             }
             else
             {
                 break;
             }
         }
+
+        Debug.Log("Best Index: " + bestIndex);
+
 
         matchingWord = word.Substring(
             wordSpan.Length - bestLength,

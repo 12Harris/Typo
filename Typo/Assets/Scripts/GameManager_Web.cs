@@ -223,12 +223,21 @@ public class GameManager_Web : MonoBehaviour
 
     public void NextWord(bool increasePoints = true)
     {
-        UIManager_Web.SaveOldWordTemplateWordIndex();
-        _currentWordTemplateIndex++;
-        UIManager_Web.UpdateWordsTemplate(_wordsTemplate[_currentWordTemplateIndex]);
-
         if (increasePoints)
             UIManager_Web.IncreasePoints(_points);
+
+        if(_currentWordTemplateIndex == _wordsTemplate.Count-1)
+        {
+            isGameOver = true;
+            GameOver();
+        }
+        else
+        {
+            UIManager_Web.SaveOldWordTemplateWordIndex();
+            _currentWordTemplateIndex++;
+            UIManager_Web.UpdateWordsTemplate(_wordsTemplate[_currentWordTemplateIndex]);
+
+        }
     }
 
     private IEnumerator ResetPhoneText()
@@ -239,7 +248,12 @@ public class GameManager_Web : MonoBehaviour
 
     private void UpdateCurrentWordTemplate(bool currentWordDisappeared)
     {
-        if (currentWordDisappeared)
+        if(_currentWordTemplateIndex == _wordsTemplate.Count-1)
+        {
+            isGameOver = true;
+            GameOver();
+        }
+        else if (currentWordDisappeared)
         {
             UIManager_Web.SaveOldWordTemplateWordIndex();
             _currentWordTemplateIndex++;
@@ -267,7 +281,7 @@ public class GameManager_Web : MonoBehaviour
                 yield return wait;
             }
 
-            if (i < wordCount - 1)
+            //if(i < wordCount - 1)
             {
                 UIManager_Web.UpdateAnimatedText1("-", 0);
                 //UIManager_Web.UpdateWordsTemplate(_wordsTemplate[_currentWordTemplateIndex]);
@@ -275,7 +289,7 @@ public class GameManager_Web : MonoBehaviour
             }
             Debug.Log("i = " + i);
         }
-        while (UIManager_Web.AnimatedWordsText.Length > 0)
+        while (!isGameOver && UIManager_Web.AnimatedWordsText.Length > 0)
         {
             UIManager_Web.UpdateAnimatedText2();
             yield return wait;
