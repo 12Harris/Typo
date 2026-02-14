@@ -28,6 +28,7 @@ public class GameManager_Web : MonoBehaviour
     public List<string> WordsTemplate => _wordsTemplate;
 
     private int _currentWordTemplateIndex;
+    public int CurrentWordTemplateIndex => _currentWordTemplateIndex;
     public string CurrentWordTemplate { get => WordsTemplate[_currentWordTemplateIndex]; set => WordsTemplate[_currentWordTemplateIndex] = value; }
 
     [SerializeField] private float _wordsTemplateAnimDelay;
@@ -36,7 +37,13 @@ public class GameManager_Web : MonoBehaviour
     public static GameManager_Web Instance => _instance;
 
     private int _points = 0;
-    private List<int> _pointsCache = new List<int>(100); // Pre-allocate capacity
+    public int Points {get => _points; set =>_points = value;}
+    private List<int> _pointsCache = new List<int>(100); // Pre-allocate 
+    private int _totalPoints = 0;
+    public int TotalPoints => _totalPoints;
+
+    private List<int> _maxBasePointsCache = new List<int>();
+    private float _currentPointsCombo = 0;
     private bool audioStarted = false;
 
     // Cached strings to avoid allocations
@@ -48,6 +55,14 @@ public class GameManager_Web : MonoBehaviour
     // Cache for Update calculations
     private int cachedSeconds = -1;
     private int cachedMinutes = -1;
+
+    private bool _mistyped;
+    private float _typingTime = 0f;
+    private float _comboCounter = 0f;
+    private float _comboMultiplier = 0f;
+
+    [SerializeField]
+    private DifficultyProgression[] _tiers;
 
     void Awake()
     {
@@ -70,6 +85,11 @@ public class GameManager_Web : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, musicClips.Count);
         audioSource.clip = musicClips[randomIndex];
         _currentWordTemplateIndex = 0;
+    }
+
+    public void InitializeForTests()
+    {
+        InitializeWordList();
     }
 
     void Update()
@@ -159,11 +179,11 @@ public class GameManager_Web : MonoBehaviour
         restart.onClick.AddListener(OnClickRestart);
 
         int savedHighscore = PlayerPrefs.GetInt(HIGHSCORE_KEY, 0);
-        if (_points > savedHighscore)
+        if (_totalPoints > savedHighscore)
         {
-            PlayerPrefs.SetInt(HIGHSCORE_KEY, _points);
+            PlayerPrefs.SetInt(HIGHSCORE_KEY, _totalPoints);
             PlayerPrefs.Save();
-            savedHighscore = _points;
+            savedHighscore = _totalPoints;
         }
 
         scoreOver.text = SCORE_FORMAT + _points.ToString();
@@ -177,7 +197,7 @@ public class GameManager_Web : MonoBehaviour
         SceneLoader.ReloadCurrentScene();
     }
 
-    public void TryDecreasePoints(string inputWord)
+    /*public void TryDecreasePoints(string inputWord)
     {
         if (inputWord.Length > _wordsTemplate[_currentWordTemplateIndex].Length)
             return;
@@ -192,23 +212,63 @@ public class GameManager_Web : MonoBehaviour
                 _pointsCache.RemoveAt(lastCacheIndex);
             }
         }
+    }*/
+
+    public void RemoveLastLetter(string inputWord)
+    {
+        IncreasePoints(-10);
+
+        //last letter typed correctly
+        if(_pointsCache.Count == inputWord.Length)
+            MisTypedWord();
+    }
+
+    public void MisTypedWord()
+    {
+        int lastCacheIndex = _pointsCache.Count - 1;
+        if (lastCacheIndex >= 0)
+        {
+            IncreasePoints(-_pointsCache[lastCacheIndex]);
+            _pointsCache.RemoveAt(lastCacheIndex);
+        }
     }
 
     public void CheckPhoneText2(string inputWord, NumberButton phoneButton)
     {
         if (_currentWordTemplateIndex >= _wordsTemplate.Count ||
-            inputWord.Length > _wordsTemplate[_currentWordTemplateIndex].Length ||
             string.IsNullOrEmpty(inputWord))
             return;
 
         int i = inputWord.Length - 1;
+        
+        //base points
+        int points = (phoneButton.PossibleChars.IndexOf(inputWord[i]) + 1) * 10;
 
-        if (_wordsTemplate[_currentWordTemplateIndex][i] == inputWord[i])
+        _pointsCache.Add(points);
+        
+
+        if(i < CurrentWordTemplate.Length)
         {
-            int points = (phoneButton.PossibleChars.IndexOf(inputWord[i]) + 1) * 10;
-            _pointsCache.Add(points);
-            IncreasePoints(points);
+            if (_wordsTemplate[_currentWordTemplateIndex][i] == inputWord[i])
+            {
+                if(_maxBasePointsCache.Count < CurrentWordTemplate.Length)
+                    _maxBasePointsCache.Add(points);
+                IncreasePoints(points);
+            }
+            else
+            {
+                Debug.Log("mistyped");
+                MisTypedWord();
+                _mistyped = true;
+            }
         }
+        else
+        {
+            MisTypedWord();
+            _mistyped = true;
+        }
+
+        _typingTime += 0.25f;
     }
 
     public void ResetInput(string inputWord)
@@ -221,10 +281,51 @@ public class GameManager_Web : MonoBehaviour
         StartCoroutine(ResetPhoneText());
     }
 
-    public void NextWord(bool increasePoints = true)
+    public void NextWord(string inputWord, bool increasePoints = true)
     {
+        var maxBasePoints = 0;
+
+        //perfect accuracy
+        if(!_mistyped && inputWord.Length == CurrentWordTemplate.Length)
+        {
+            _points += 200;
+            _comboCounter +=1;
+            StartCoroutine(UIManager_Web.DisplayExtraPoints("Perfect Accuracy!", 200));
+        }   
+        else
+        {
+            _comboCounter = 0;
+        }
+
+        _comboMultiplier = 1 + Mathf.Min(Mathf.Floor(_comboCounter * 0.2f) ,5.0f);
+
+        //word length bonus
+        for (int i = 0; i < CurrentWordTemplate.Length; i++)
+        {
+            if(inputWord[i] == CurrentWordTemplate[i])
+                _points +=20;
+
+        }
+
+        //speed bonus
+        var idealTypingTime = CurrentWordTemplate.Length*0.3f;
+        var speedBonus = (idealTypingTime - _typingTime)*50f;
+        _points += (int)speedBonus;
+
+        //perfect timing
+        if(Mathf.Abs(idealTypingTime - _typingTime) < 0.25f)
+            _points += 100;
+
+        _typingTime = 0f;
+
+        //apply combo multiplier
+        _points *= (int)_comboMultiplier;
+
         if (increasePoints)
             UIManager_Web.IncreasePoints(_points);
+
+        _totalPoints += _points;
+        _points = 0;
 
         if(_currentWordTemplateIndex == _wordsTemplate.Count-1)
         {
@@ -238,6 +339,7 @@ public class GameManager_Web : MonoBehaviour
             UIManager_Web.UpdateWordsTemplate(_wordsTemplate[_currentWordTemplateIndex]);
 
         }
+        _mistyped = false;
     }
 
     private IEnumerator ResetPhoneText()

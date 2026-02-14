@@ -175,7 +175,7 @@ public class PhoneController_Web : MonoBehaviour
         var gameManager = GameManager_Web.Instance;
         if (gameManager != null)
         {
-            gameManager.TryDecreasePoints(_inputWord.text);
+            gameManager.RemoveLastLetter(_inputWord.text);
         }
 
         _inputWord.text = _inputWord.text.Remove(_inputWord.text.Length - 1);

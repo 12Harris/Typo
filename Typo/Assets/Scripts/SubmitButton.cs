@@ -13,7 +13,7 @@ public class SubmitButton : PhoneButton
         if (PhoneController_Web.Instance.InputWord.Length > 0)
         {
             GameManager_Web.Instance.ResetInput(PhoneController.Instance.InputWord);
-            GameManager_Web.Instance.NextWord();
+            GameManager_Web.Instance.NextWord(PhoneController.Instance.InputWord);
         }
     }
 

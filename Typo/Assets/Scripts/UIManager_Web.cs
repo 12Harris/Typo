@@ -21,6 +21,9 @@ public static class UIManager_Web
     public static int LastWordTemplateOffset { get; set; } = 0;
     public static event Action<bool> _onWordDisappeared;
 
+    private static GameObject _extraPointsText;
+    private static GameObject _extraPoints;
+
     // Cache to avoid repeated GetComponent calls
     private static bool _isInitialized = false;
 
@@ -30,6 +33,7 @@ public static class UIManager_Web
 
         GameObject pointsObj = GameObject.Find("RootGame/Points");
         _animatedWordsTemplate = GameObject.Find("RootGame/AnimatedWords");
+        _extraPoints = GameObject.Find("RootGame/ExtraPoints/Text");
 
         if (pointsObj != null)
             _pointsText = pointsObj.transform.Find("Text").GetComponent<TextMeshProUGUI>();
@@ -80,7 +84,7 @@ public static class UIManager_Web
         EnsureInitialized();
 
         if (_pointsText != null)
-            _pointsText.text = points.ToString();
+            _pointsText.text = (GameManager_Web.Instance.TotalPoints + points).ToString();
     }
 
     public static void SaveOldWordTemplateWordIndex(bool nextWord = true)
@@ -267,16 +271,43 @@ public static class UIManager_Web
         _animatedWordsText.text = text;
 
         if (firstChar == '-')
-        {
-
             _onWordDisappeared?.Invoke(GameManager_Web.Instance.CurrentWordTemplate == "");
-            Debug.Log("WORD TEMPLATE DISAPPEARED!");
-        }
+        
         else
-        {
             SaveOldWordTemplateWordIndex(false);
 
-        }
+        
         return text;
+    }
+
+    public static IEnumerator DisplayExtraPoints(string text, int extraPoints)
+    {
+        float time = 0f;
+        float duration = 1f;
+
+        var extraPointsText = _extraPoints.GetComponent<TextMeshProUGUI>();
+        Color color = extraPointsText.color;       
+        extraPointsText.text = text;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            color.a = Mathf.Lerp(0f, 1f, time / duration);
+            extraPointsText.color = color;
+            yield return null;
+        }
+        
+        time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            color.a = Mathf.Lerp(1f, 0f, time / duration);
+            extraPointsText.color = color;
+            yield return null;
+        }
+
+        color.a = 0f;
+        extraPointsText.color = color;
     }
 }

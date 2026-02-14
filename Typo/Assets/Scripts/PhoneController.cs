@@ -139,7 +139,7 @@ public class PhoneController : MonoBehaviour
         {
             if (clickTimer <= 0.0f)
             {
-                GameManager_Web.Instance.TryDecreasePoints(_inputWord.text);
+                GameManager_Web.Instance.RemoveLastLetter(_inputWord.text);
                 _inputWord.text = _inputWord.text.Remove(_inputWord.text.Length - 1);
                 _inputScreen.UpdateCursor(false, true);
             }
@@ -149,7 +149,7 @@ public class PhoneController : MonoBehaviour
                 _removeTextTimer += Time.deltaTime;
                 if (_removeTextTimer > _removeTextDelay)
                 {
-                    GameManager_Web.Instance.TryDecreasePoints(_inputWord.text);
+                    GameManager_Web.Instance.RemoveLastLetter(_inputWord.text);
                     _inputWord.text = _inputWord.text.Remove(_inputWord.text.Length - 1);
                     _removeTextTimer = 0.0f;
                     _inputScreen.UpdateCursor(false, true);
